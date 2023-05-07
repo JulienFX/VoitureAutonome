@@ -1,0 +1,10 @@
+/* modification fixe non altérée par l'utilisateur donc modif dans css */ 
+body{
+    margin:0;
+    background:darkgrey;
+    overflow: hidden;
+    text-align: center;
+}
+#myCanvas{
+    background: lightcoral;
+}
