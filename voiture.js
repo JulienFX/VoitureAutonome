@@ -23,31 +23,32 @@ class Voiture{
         }
         if(this.vitesse>this.vitesseMax){
             this.vitesse=this.vitesseMax
-            console.log("vit>gra")
         }
         if(this.vitesse<-this.vitesseMax/2){ // marche arrière
             this.vitesse =-this.vitesseMax/2
-            console.log("autre")
         }
         if(this.vitesse>0){
             this.vitesse-=this.friction
-            console.log("positif speed")
         }
         if(this.vitesse<0){
             this.vitesse+=this.friction
-            console.log("negatif speed")
         }
         if(Math.abs(this.vitesse)<this.friction){
             this.speed=0
         }
-        if(this.controls.gauche){
-            this.angle-=0.03
+        if(this.vitesse!=0){
+            const flip = this.vitesse>0?1:-1
+            if(this.controls.gauche){
+                this.angle-=0.03*flip
+            }
+            if(this.controls.droite){
+                this.angle+=0.03*flip
+            }
         }
-        if(this.controls.droite){
-            this.angle+=0.03
-        }
-        this.y-=this.vitesse
-        console.log(this.vitesse)
+        
+        this.x-=Math.sin(this.angle)*this.vitesse
+        this.y-=Math.cos(this.angle)*this.vitesse
+        
     }
 
     draw(ctx){
