@@ -3,7 +3,7 @@ body{
     margin:0;
     background:darkgrey;
     overflow: hidden;
-    text-align: center;
+    text-align: center; /* pour centrer la route */
 }
 #myCanvas{
     background: lightcoral;

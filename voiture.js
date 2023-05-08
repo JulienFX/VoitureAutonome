@@ -1,24 +1,28 @@
 class Voiture{
-    constructor(x,y,width,height){
+    constructor(x,y,largeur,longueur){
         this.x=x
         this.y=y
-        this.width=width
-        this.height=height
+        this.largeur=largeur
+        this.longueur=longueur
 
         this.vitesse=0
         this.acceleration=0.2 
-        this.vitesseMax=3 
+        this.vitesseMax=3
         this.friction=0.05
         this.angle=0
 
-        this.controls = new Controls()
+        this.controleur = new Controleur()
     }
 
     maj(){ // maj = mise à jour
-        if(this.controls.avant){
+        this.#deplacement()
+        
+    }
+    #deplacement(){
+        if(this.controleur.avant){
             this.vitesse+=this.acceleration
         }
-        if(this.controls.arriere){
+        if(this.controleur.arriere){
             this.vitesse-=this.acceleration
         }
         if(this.vitesse>this.vitesseMax){
@@ -27,10 +31,10 @@ class Voiture{
         if(this.vitesse<-this.vitesseMax/2){ // marche arrière
             this.vitesse =-this.vitesseMax/2
         }
-        if(this.vitesse>0){
+        if(this.vitesse>0){ // TODO : rajout d'une condition avec le boutton pressé 
             this.vitesse-=this.friction
         }
-        if(this.vitesse<0){
+        if(this.vitesse<0){ // TODO : rajout d'une condition avec le boutton pressé 
             this.vitesse+=this.friction
         }
         if(Math.abs(this.vitesse)<this.friction){
@@ -38,17 +42,17 @@ class Voiture{
         }
         if(this.vitesse!=0){
             const flip = this.vitesse>0?1:-1
-            if(this.controls.gauche){
+            if(this.controleur.gauche){
                 this.angle-=0.03*flip
             }
-            if(this.controls.droite){
+            if(this.controleur.droite){
                 this.angle+=0.03*flip
             }
         }
         
         this.x-=Math.sin(this.angle)*this.vitesse
         this.y-=Math.cos(this.angle)*this.vitesse
-        
+        // x pas lié à cos car positionnement voiture oblige inversement 
     }
 
     draw(ctx){
@@ -56,7 +60,7 @@ class Voiture{
         ctx.translate(this.x,this.y)
         ctx.rotate(-this.angle)
         ctx.beginPath()
-        ctx.rect(-this.width/2,-this.height/2,this.width,this.height)
+        ctx.rect(-this.largeur/2,-this.longueur/2,this.largeur,this.longueur)
         ctx.fill()
         ctx.restore()
     }
