@@ -4,9 +4,10 @@ canvas.width=200 // en général on fait modification dans js quand l'objet va �
 const ctx = canvas.getContext("2d") // le contexte permet de savoir comment sera le rendu des dessins : 2D/3D 
 const route = new Route(canvas.width/2,canvas.width*0.9)
 const voiture = new Voiture(route.getCentreVoie(2),100,30,50) // choix de la voie avec le x de la voiture 
-voiture.draw(ctx)
+
 
 animer()
+voiture.draw(ctx)
 function animer(){
     voiture.maj()
     canvas.height= window.innerHeight // refresh coordonnées voiture 

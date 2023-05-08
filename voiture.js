@@ -11,11 +11,14 @@ class Voiture{
         this.friction=0.05
         this.angle=0
 
+        this.capteur=new Capteur(this)
         this.controleur = new Controleur()
     }
 
     maj(){ // maj = mise à jour
         this.#deplacement()
+        this.capteur.maj()
+        
         
     }
     #deplacement(){
@@ -63,5 +66,7 @@ class Voiture{
         ctx.rect(-this.largeur/2,-this.longueur/2,this.largeur,this.longueur)
         ctx.fill()
         ctx.restore()
+
+        this.capteur.draw(ctx)
     }
 }
