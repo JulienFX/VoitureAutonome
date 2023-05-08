@@ -7,9 +7,8 @@ const voiture = new Voiture(route.getCentreVoie(2),100,30,50) // choix de la voi
 
 
 animer()
-voiture.draw(ctx)
 function animer(){
-    voiture.maj()
+    voiture.maj(route.bords)
     canvas.height= window.innerHeight // refresh coordonnées voiture 
     ctx.save()
     ctx.translate(0,-voiture.y+canvas.height*0.7)

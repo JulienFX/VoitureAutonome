@@ -15,10 +15,9 @@ class Voiture{
         this.controleur = new Controleur()
     }
 
-    maj(){ // maj = mise à jour
+    maj(bordsRoute){ // maj = mise à jour
         this.#deplacement()
-        this.capteur.maj()
-        
+        this.capteur.maj(bordsRoute)
         
     }
     #deplacement(){
