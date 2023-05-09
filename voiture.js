@@ -63,7 +63,9 @@ class Voiture{
         ctx.rotate(-this.angle)
         ctx.beginPath()
         ctx.rect(-this.largeur/2,-this.longueur/2,this.largeur,this.longueur)
+        ctx.fillStyle=getCouleurAleat()
         ctx.fill()
+        
         ctx.restore()
 
         this.capteur.draw(ctx)

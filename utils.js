@@ -1,3 +1,7 @@
+// CSTE jeu de couleur 
+const couleurs =['blue','black','purple','grey','green','cyan']
+const indCouleur = getNbIntAleat(couleurs.length)
+
 function lerp(A,B,t){ // nom de fonction souvent utilisée dans les jeux vidéos pour créer un mvt le long d'une trajectoire droite et pour dessiner des lignes pointillées
     return A+(B-A)*t
 }
@@ -21,4 +25,16 @@ function getIntersection(A,B,C,D){
     }
 
     return null;
+}
+
+function getNbIntAleat(max){
+    let val=0
+    while(val==0){
+        val= Math.floor(Math.random() * max) 
+    }
+    return val
+}
+
+function getCouleurAleat(){
+    return couleurs[indCouleur]
 }

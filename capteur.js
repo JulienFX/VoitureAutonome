@@ -1,7 +1,7 @@
 class Capteur{
     constructor(voiture){
         this.voiture = voiture
-        this.nbRayon = 3 // phare
+        this.nbRayon = getNbIntAleat(10) // phare, AVANT => 3
         this.tailleRayon = 100
         this.diffusionRayon = Math.PI/4
 
@@ -52,7 +52,7 @@ class Capteur{
             }
             ctx.beginPath()
             ctx.lineWidth=2
-            ctx.strokeStyle="green"
+            ctx.strokeStyle="yellow"
             ctx.moveTo(this.rayons[i][0].x,this.rayons[i][0].y)
             ctx.lineTo(fin.x,fin.y)
             ctx.stroke()

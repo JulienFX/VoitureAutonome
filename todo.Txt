@@ -1,0 +1,2 @@
+- Fonctionnalité : freiner 
+- Retirer une voie 
