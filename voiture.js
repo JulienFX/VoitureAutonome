@@ -11,14 +11,40 @@ class Voiture{
         this.friction=0.05
         this.angle=0
 
+        this.polygone=[]
+
         this.capteur=new Capteur(this)
         this.controleur = new Controleur()
     }
 
     maj(bordsRoute){ // maj = mise à jour
         this.#deplacement()
+        this.polygone=this.#creaPolygone()
         this.capteur.maj(bordsRoute)
         
+    }
+
+    #creaPolygone(){
+        const points = []
+        const rad = Math.hypot(this.largeur,this.longueur)/2
+        const alpha = Math.atan2(this.largeur,this.longueur)
+        points.push({
+            x:this.x-Math.sin(this.angle-alpha)*rad,
+            y:this.y-Math.cos(this.angle-alpha)*rad
+        })
+        points.push({
+            x:this.x-Math.sin(this.angle+alpha)*rad,
+            y:this.y-Math.cos(this.angle+alpha)*rad
+        })
+        points.push({
+            x:this.x-Math.sin(Math.PI+this.angle-alpha)*rad,
+            y:this.y-Math.cos(Math.PI+this.angle-alpha)*rad
+        })
+        points.push({
+            x:this.x-Math.sin(Math.PI+this.angle+alpha)*rad,
+            y:this.y-Math.cos(Math.PI+this.angle+alpha)*rad
+        })
+        return points
     }
     #deplacement(){
         if(this.controleur.avant){
@@ -58,16 +84,13 @@ class Voiture{
     }
 
     draw(ctx){
-        ctx.save()
-        ctx.translate(this.x,this.y)
-        ctx.rotate(-this.angle)
         ctx.beginPath()
-        ctx.rect(-this.largeur/2,-this.longueur/2,this.largeur,this.longueur)
         ctx.fillStyle=getCouleurAleat()
+        ctx.moveTo(this.polygone[0].x,this.polygone[0].y)
+        for(let i=1;i<this.polygone.length;i++){
+            ctx.lineTo(this.polygone[i].x,this.polygone[i].y)
+        }
         ctx.fill()
-        
-        ctx.restore()
-
         this.capteur.draw(ctx)
     }
 }
