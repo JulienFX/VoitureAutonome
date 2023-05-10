@@ -10,7 +10,9 @@ class Voiture{
         this.vitesseMax=3
         this.friction=0.05
         this.angle=0
-
+        this.degats=false
+        
+        // pas obligatoire de le référencer dans le constructeur ! 
         this.polygone=[]
 
         this.capteur=new Capteur(this)
@@ -20,8 +22,18 @@ class Voiture{
     maj(bordsRoute){ // maj = mise à jour
         this.#deplacement()
         this.polygone=this.#creaPolygone()
+        this.degats=this.#evalDegats(bordsRoute)
         this.capteur.maj(bordsRoute)
         
+    }
+
+    #evalDegats(bordsRoute){
+        for(let i=0;i<bordsRoute.length;i++){
+            if(polysIntersect(this.polygone,bordsRoute[i])){
+                return true
+            }
+        }
+        return false
     }
 
     #creaPolygone(){
