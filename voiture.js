@@ -20,9 +20,12 @@ class Voiture{
     }
 
     maj(bordsRoute){ // maj = mise à jour
-        this.#deplacement()
-        this.polygone=this.#creaPolygone()
-        this.degats=this.#evalDegats(bordsRoute)
+        if(!this.degats){
+            this.#deplacement()
+            this.polygone=this.#creaPolygone()
+            this.degats=this.#evalDegats(bordsRoute)
+        }
+        
         this.capteur.maj(bordsRoute)
         
     }
@@ -97,7 +100,12 @@ class Voiture{
 
     draw(ctx){
         ctx.beginPath()
-        ctx.fillStyle=getCouleurAleat()
+        if(this.degats){
+            ctx.fillStyle="orange"
+        }else{
+            ctx.fillStyle=getCouleurAleat()
+        }
+        
         ctx.moveTo(this.polygone[0].x,this.polygone[0].y)
         for(let i=1;i<this.polygone.length;i++){
             ctx.lineTo(this.polygone[i].x,this.polygone[i].y)
