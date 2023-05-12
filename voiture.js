@@ -1,5 +1,5 @@
 class Voiture{
-    constructor(x,y,largeur,longueur){
+    constructor(x,y,largeur,longueur,controle){
         this.x=x
         this.y=y
         this.largeur=largeur
@@ -16,7 +16,7 @@ class Voiture{
         this.polygone=[]
 
         this.capteur=new Capteur(this)
-        this.controleur = new Controleur()
+        this.controleur = new Controleur(controle)
     }
 
     maj(bordsRoute){ // maj = mise à jour

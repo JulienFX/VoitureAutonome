@@ -1,10 +1,18 @@
 class Controleur{
-    constructor(){
+    constructor(type){
         this.avant=false
         this.gauche=false
         this.droite=false
         this.arriere=false
-        this.#clavierListener()  
+        switch(type){
+            case "DETENTEUR" :
+                this.#clavierListener()  
+                break
+            case "AUTRES" :
+                this.avant=true
+                break
+        }
+        
     }
     #clavierListener(){ // # private method
         document.onkeydown=(event)=>{ // même principe que document.onkeydown=function(event){} mais grâce à la flèche dans le code actuellement
