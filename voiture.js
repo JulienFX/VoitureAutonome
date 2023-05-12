@@ -22,22 +22,27 @@ class Voiture{
         this.controleur = new Controleur(controle)
     }
 
-    maj(bordsRoute){ // maj = mise à jour
+    maj(bordsRoute,traffic){ // maj = mise à jour
         if(!this.degats){
             this.#deplacement()
             this.polygone=this.#creaPolygone()
-            this.degats=this.#evalDegats(bordsRoute)
+            this.degats=this.#evalDegats(bordsRoute,traffic)
         }
         if(this.capteur){
-            this.capteur.maj(bordsRoute)
+            this.capteur.maj(bordsRoute,traffic)
         }
         
         
     }
 
-    #evalDegats(bordsRoute){
+    #evalDegats(bordsRoute,traffic){
         for(let i=0;i<bordsRoute.length;i++){
             if(polysIntersect(this.polygone,bordsRoute[i])){
+                return true
+            }
+        }
+        for(let i=0;i<traffic.length;i++){
+            if(polysIntersect(this.polygone,traffic[i].polygone)){
                 return true
             }
         }

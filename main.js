@@ -12,9 +12,9 @@ const traffic =[new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-100,30,50,"
 animer()
 function animer(){
     for(let i=0;i<traffic.length;i++){
-        traffic[i].maj(route.bords)
+        traffic[i].maj(route.bords,[])
     }
-    voiture.maj(route.bords)
+    voiture.maj(route.bords,traffic)
     canvas.height= window.innerHeight // refresh coordonnées voiture 
     ctx.save()
     ctx.translate(0,-voiture.y+canvas.height*0.7)
