@@ -1,5 +1,5 @@
 class Voiture{
-    constructor(x,y,largeur,longueur,controle){
+    constructor(x,y,largeur,longueur,controle,vitesseMax=3){
         this.x=x
         this.y=y
         this.largeur=largeur
@@ -7,7 +7,7 @@ class Voiture{
 
         this.vitesse=0
         this.acceleration=0.2 
-        this.vitesseMax=3
+        this.vitesseMax=vitesseMax
         this.friction=0.05
         this.angle=0
         this.degats=false
@@ -15,7 +15,10 @@ class Voiture{
         // pas obligatoire de le référencer dans le constructeur ! 
         this.polygone=[]
 
-        this.capteur=new Capteur(this)
+        if(controle!="AUTRES"){
+            this.capteur=new Capteur(this)
+        }
+        
         this.controleur = new Controleur(controle)
     }
 
@@ -25,8 +28,10 @@ class Voiture{
             this.polygone=this.#creaPolygone()
             this.degats=this.#evalDegats(bordsRoute)
         }
+        if(this.capteur){
+            this.capteur.maj(bordsRoute)
+        }
         
-        this.capteur.maj(bordsRoute)
         
     }
 
@@ -111,6 +116,9 @@ class Voiture{
             ctx.lineTo(this.polygone[i].x,this.polygone[i].y)
         }
         ctx.fill()
-        this.capteur.draw(ctx)
+        if(this.capteur){
+            this.capteur.draw(ctx)
+        }
+        
     }
 }
