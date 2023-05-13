@@ -11,6 +11,8 @@ class Voiture{
         this.friction=0.05
         this.angle=0
         this.degats=false
+
+        this.usageCerveau=controle=="IA"
         
         // pas obligatoire de le référencer dans le constructeur ! 
         this.polygone=[]
@@ -34,6 +36,13 @@ class Voiture{
             const offsets = this.capteur.bordsDetecte.map(s=>s==null?0:1-s.offset) // fonction fléché qu'on applique uniquement à une variable
             const sorties = reseauNeuronne.feedForward(offsets,this.cerveau)
             console.log(sorties)
+
+            if(this.usageCerveau){
+                this.controleur.avant=sorties[0]
+                this.controleur.gauche=sorties[1]
+                this.controleur.droite=sorties[2]
+                this.controleur.arriere=sorties[3]
+            }
         }
         
         
