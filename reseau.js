@@ -1,20 +1,20 @@
 class Niveau{
     constructor(entreeCpt,sortieCpt){
-        this.entree = new Array(entreeCpt)
-        this.sortie = new Array(sortieCpt)
+        this.entree = new Array(entreeCpt) // valeurs d'entrées données par les calpteurs
+        this.sortie = new Array(sortieCpt) // def en fonction du bias et du poids 
         this.biais = new Array(sortieCpt)
-
+        // le biais permet d'évaluer si les prédictions sont précises ou non et si le modèle a tendance à sur/sous-estimer les valeurs de la variable d'intérêt
         this.poids=[]
         for(let i=0;i<entreeCpt;i++){
             this.poids[i]=new Array(sortieCpt) // pour chaque entrée on associe les connexions aux différentes sorties
         }
 
-        Level.#aleat(this)
+        Niveau.#aleat(this)
     }
 
     static #aleat(niveau){ // serialisation
         for(let i=0; i<niveau.entree.length;i++){
-            for (let j=0; j<niveau.sortie.length;j++){
+            for (let j=0; j<niveau.sortie.length;j++){ // pour chaque niveau de notre réseau de neuronne on parcours chaque noeud 
                 niveau.poids[i][j]=Math.random()*2-1 // entre -1 et 1
             }
         }
@@ -31,10 +31,11 @@ class Niveau{
         for(let i=0;i<niveau.sortie.length;i++){
             let somme=0
             for(let j=0;j<niveau.entree.length;j++){
-                somme+=niveau.entree[j]*niveau.poids[j][i]
+                somme+=niveau.entree[j]*niveau.poids[j][i] 
             }
+            // plus le biais est proche de 0, plus la prédiction est bonne - par défaut le biais est défini aléatoirement
             if(somme>niveau.biais[i]){
-                niveau.sortie
+                niveau.sortie[i]=1
             }else{
                 niveau.sortie[i]=0
             }
