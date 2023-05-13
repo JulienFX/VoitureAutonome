@@ -1,3 +1,20 @@
+class reseauNeuronne{
+    constructor(cptNeuronne){
+        this.niveaux=[]
+        for(let i=0;i<cptNeuronne.length-1;i++){
+            this.niveaux.push(new Niveau(cptNeuronne[i],cptNeuronne[i+1]))
+        }
+    }
+
+    static feedForward(dataEntree,reseau){
+        let sorties=Niveau.feedForward(dataEntree,reseau.niveau[0])
+        for(let i=1;i<reseau.niveau.length;i++){
+            sorties=Niveau.feedForward(sorties,reseau.niveau[i])
+        }
+        return sorties
+    }
+}
+
 class Niveau{
     constructor(entreeCpt,sortieCpt){
         this.entree = new Array(entreeCpt) // valeurs d'entrées données par les calpteurs
@@ -23,9 +40,9 @@ class Niveau{
         }
     }
 
-    static feedForward(donnéesEntree,niveau){
+    static feedForward(dataEntree,niveau){
         for(let i=0;i<niveau.inputs.length;i++){
-            niveau.entree[i]=donnéesEntree[i]
+            niveau.entree[i]=dataEntree[i]
         }
 
         for(let i=0;i<niveau.sortie.length;i++){
@@ -33,11 +50,11 @@ class Niveau{
             for(let j=0;j<niveau.entree.length;j++){
                 somme+=niveau.entree[j]*niveau.poids[j][i] 
             }
-            // plus le biais est proche de 0, plus la prédiction est bonne - par défaut le biais est défini aléatoirement
+            // plus le biais est proche de 0, plus la prédiction est bonne / par défaut le biais est défini aléatoirement
             if(somme>niveau.biais[i]){
-                niveau.sortie[i]=1
+                niveau.sortie[i]=1 // activation
             }else{
-                niveau.sortie[i]=0
+                niveau.sortie[i]=0 // non activation
             }
         }
         return niveau.sortie
