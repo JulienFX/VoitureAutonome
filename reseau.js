@@ -7,9 +7,9 @@ class reseauNeuronne{
     }
 
     static feedForward(dataEntree,reseau){
-        let sorties=Niveau.feedForward(dataEntree,reseau.niveau[0])
-        for(let i=1;i<reseau.niveau.length;i++){
-            sorties=Niveau.feedForward(sorties,reseau.niveau[i])
+        let sorties=Niveau.feedForward(dataEntree,reseau.niveaux[0])
+        for(let i=1;i<reseau.niveaux.length;i++){
+            sorties=Niveau.feedForward(sorties,reseau.niveaux[i])
         }
         return sorties
     }
@@ -41,7 +41,7 @@ class Niveau{
     }
 
     static feedForward(dataEntree,niveau){
-        for(let i=0;i<niveau.inputs.length;i++){
+        for(let i=0;i<niveau.entree.length;i++){
             niveau.entree[i]=dataEntree[i]
         }
 
