@@ -6,7 +6,7 @@ body{
     text-align: center; /* pour centrer la route */
 }
 #reseauCanvas{
-    background: lightcoral;
+    background: black;
 }
 #voiturekCanvas{
     background: lightcoral;
