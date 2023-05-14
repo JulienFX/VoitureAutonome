@@ -35,7 +35,6 @@ class Voiture{
             this.capteur.maj(bordsRoute,traffic)
             const offsets = this.capteur.bordsDetecte.map(s=>s==null?0:1-s.offset) // fonction fléché qu'on applique uniquement à une variable
             const sorties = reseauNeuronne.feedForward(offsets,this.cerveau)
-            console.log(sorties)
 
             if(this.usageCerveau){
                 this.controleur.avant=sorties[0]
