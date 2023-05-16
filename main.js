@@ -9,7 +9,15 @@ do{ nbVoies = getNbIntAleat(6)}while(nbVoies<=1)
 const route = new Route(voitureCanvas.width/2,voitureCanvas.width*0.9,nbVoies) // avant => 2 params
 const voitures = genererVoiture(100)//new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),100,30,50,"IA") // choix de la voie avec le x de la voiture 
 // avant => route.getCentreVoie(2)
-const traffic =[new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-100,30,50,"AUTRES",2)]
+const traffic =[
+    new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-100,30,50,"AUTRES",2),
+    new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-300,30,50,"AUTRES",2),
+    new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-200,30,50,"AUTRES",2),
+    new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-600,30,50,"AUTRES",2),
+    new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-400,30,50,"AUTRES",2),
+    new Voiture(route.getCentreVoie(getNbIntAleat(6-1)),-500,30,50,"AUTRES",2)
+
+]
 let meilleurVoiture=voitures[0]
 if(localStorage.getItem("meilleurCerveau")){
     meilleurVoiture.cerveau=JSON.parse(localStorage.getItem("meilleurCerveau"))
