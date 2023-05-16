@@ -23,20 +23,24 @@ function animer(){
     for(let i=0;i<traffic.length;i++){
         traffic[i].maj(route.bords,[])
     }
+    
     for (let i=0;i<voitures.length;i++){
         voitures[i].maj(route.bords,traffic)
     }
+    const meilleurVoiture = voitures.find(c=>c.y==Math.min(... voitures.map(c=>c.y))) // ... => permet de spread le tableau 
     voitureCanvas.height= window.innerHeight // match taille avec écran
     voitureCtx.save()
-    voitureCtx.translate(0,-voitures[0].y+voitureCanvas.height*0.7)
+    voitureCtx.translate(0,-meilleurVoiture.y+voitureCanvas.height*0.7)
     route.draw(voitureCtx)
     for(let i=0;i<traffic.length;i++){
         traffic[i].draw(voitureCtx)
     }
+    voitureCtx.globalAlpha=0.2
     for(let i=0;i<voitures.length;i++){
         voitures[i].draw(voitureCtx)
     }
-    
+    voitureCtx.globalAlpha=1
+    meilleurVoiture.draw(voitureCtx,true)
     voitureCtx.restore()
     requestAnimationFrame(animer)
 }

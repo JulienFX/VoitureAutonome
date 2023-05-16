@@ -121,7 +121,7 @@ class Voiture{
         // x pas lié à cos car positionnement voiture oblige inversement 
     }
 
-    draw(ctx){
+    draw(ctx,rpzCapteur=false){
         ctx.beginPath()
         if(this.degats){
             ctx.fillStyle="orange"
@@ -134,7 +134,7 @@ class Voiture{
             ctx.lineTo(this.polygone[i].x,this.polygone[i].y)
         }
         ctx.fill()
-        if(this.capteur){
+        if(this.capteur && rpzCapteur){
             this.capteur.draw(ctx)
         }
         
