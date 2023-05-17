@@ -1,3 +1,0 @@
-- Fonctionnalité : freiner 
-- Collisions 
-- Rajout d'autres points pour avoir une forme originale ? => aléatoire ?

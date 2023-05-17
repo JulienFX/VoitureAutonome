@@ -13,6 +13,19 @@ class reseauNeuronne{
         }
         return sorties
     }
+
+    static mutation(reseau,qte=1){
+        reseau.niveaux.forEach(niveau => {
+            for(let i=0;i<niveau.biais.length;i++){
+                niveau.biais[i]=lerp(niveau.biais[i],Math.random()*2-1,qte)
+            }
+            for(let i=0;i<niveau.poids.length;i++){
+                for(let j=0;j<niveau.poids[i].length;j++){
+                    niveau.poids[i][j]=lerp(niveau.poids[i][j],Math.random()*2-1,qte)
+                }
+            }
+        });
+    }
 }
 
 class Niveau{
